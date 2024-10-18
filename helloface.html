@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive 3D Face by Abdou</title>
+    <title>Interactive Cool Face by Abdou</title>
     <style>
         body {
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,45 +14,52 @@
             margin: 0;
             flex-direction: column;
             position: relative;
+            font-family: 'Poppins', sans-serif;
         }
 
         h1 {
-            font-family: Arial, sans-serif;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            font-size: 2rem;
             margin: 0;
             position: absolute;
-            top: 10px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .face {
             position: relative;
-            width: 300px;
-            height: 400px;
-            background-color: #ffe6cc;
+            width: 350px;
+            height: 450px;
+            background: radial-gradient(circle at top, #fddbb8, #f0a05f);
             border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            border: 5px solid white;
         }
 
         .eyes-container {
             display: flex;
             justify-content: space-between;
-            width: 220px;
+            width: 250px;
+            position: relative;
+            top: -20px;
         }
 
         .eye {
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle at center, #ffffff, #cccccc);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at center, #ffffff, #eeeeee);
             border-radius: 50%;
             position: relative;
-            margin: 0;
-            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.15), 5px 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 255, 255, 0.8);
+            border: 3px solid white;
         }
 
         .pupil {
@@ -61,42 +68,61 @@
             background: radial-gradient(circle at 30% 30%, #000000, #333333);
             border-radius: 50%;
             position: absolute;
-            top: 42.5px;
-            left: 42.5px;
-            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.4), 5px 5px 15px rgba(0, 0, 0, 0.5);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5), 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .nose {
-            width: 20px;
-            height: 50px;
-            background-color: #ffcc99;
+            width: 25px;
+            height: 60px;
+            background-color: #e88860;
             border-radius: 20px;
-            margin-top: 20px;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .mouth {
             width: 120px;
-            height: 60px;
-            background-color: #ff6666;
-            border-radius: 0 0 100px 100px;
-            margin-top: 30px;
+            height: 80px;
+            background-color: #f44141;
+            border-radius: 0 0 80px 80px;
+            margin-top: 20px;
             transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         .mouth.talking {
-            height: 100px;
-            background-color: #ff4d4d;
+            height: 120px;
+            background-color: #ff3b3b;
             border-radius: 0 0 150px 150px;
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
         }
 
         .hello-message {
-            font-size: 24px;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #333;
+            color: white;
             position: absolute;
-            top: -40px;
+            top: -60px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Add glowing effect on hover */
+        .face:hover {
+            animation: faceGlow 2s infinite alternate;
+        }
+
+        @keyframes faceGlow {
+            from {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            to {
+                box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
+            }
         }
     </style>
 </head>
@@ -133,8 +159,8 @@
                 
                 const angle = Math.atan2(e.pageY - eyeCenterY, e.pageX - eyeCenterX);
                 
-                const pupilX = Math.cos(angle) * 35; // Adjust this value to limit the pupil's movement
-                const pupilY = Math.sin(angle) * 35; // Adjust this value to limit the pupil's movement
+                const pupilX = Math.cos(angle) * 25; // Adjust this value to limit the pupil's movement
+                const pupilY = Math.sin(angle) * 25; // Adjust this value to limit the pupil's movement
                 
                 pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
             });
@@ -153,7 +179,7 @@
                 setTimeout(() => {
                     helloMessage.style.opacity = 0;
                     mouth.classList.remove('talking');
-                }, 500);
+                }, 2000);
             }
         });
     </script>
